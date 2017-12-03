@@ -24,16 +24,16 @@ Group FF_302       	"302"      		<classroom>  (gFF)
 //Group FF_307        "307"       	<classroom>  (gFF)
 //Group FF_309   		"309"      		<classroom>  (gFF)
 
-Group FF_302_Light    "开关"      	<light>  	(FF_302)
-
-Group FF_302_Dimming  "调光"     <slider>  	(FF_302)
-
-Group FF_302_seat  	"座位"     		<seat>  (FF_302)
+//Group FF_302_Light    "开关"      	<light>  	(FF_302)
+//
+//Group FF_302_Dimming  "调光"     <slider>  	(FF_302)
+//
+//Group FF_302_seat  	"座位"     		<seat>  (FF_302)
 
 String VoiceCommand
 
 String Photometry_FF_0			"教室光照度 [%s Lux]"  		<sun> 		(FF_302) { channel="exec:command:light:output" }
-//String Human_FF_0				"座位 [MAP(zh.map):%s]"  					<human> 	(FF_302) { channel="exec:command:human:output" }
+String Human_FF_0				"座位 [MAP(zh.map):%s]"  					<human> 	(FF_302) { channel="exec:command:human:output" }
 //String Hello_FF_0				"Hello [%s]"  					<human> 	(FF_302) { channel="exec:command:hello:output" }
 Switch Videos					"视频"  		<office> 		(FF_302)
 

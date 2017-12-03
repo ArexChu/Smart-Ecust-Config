@@ -9,15 +9,18 @@
 //                 "http://www.placecage.com", "http://www.placecage.com/c", "http://www.placecage.com/g")
 //val Random random = new Random()
 
-val http_url = "http://raspberrypi:8080/proxy/"
-val dimmed_url = "dimmed/leds?color="
-val coap_url_4 = "coap://[aaaa::212:4b00:5af:827c]/"
-val coap_url_3 = "coap://[aaaa::212:4b00:5af:80d5]/"
-val coap_url_2 = "coap://[aaaa::212:4b00:5af:825a]/"
-val coap_url_1 = "coap://[aaaa::212:4b00:5af:7f61]/"
-val coap_url_0 = "coap://[aaaa::212:4b00:5af:81a0]/"
-val video_path = "/home/arex/Videos/"
+//val http_url = "http://raspberrypi:8080/proxy/"
+//val dimmed_url = "dimmed/leds?color="
+//val coap_url_4 = "coap://[aaaa::212:4b00:5af:827c]/"
+//val coap_url_3 = "coap://[aaaa::212:4b00:5af:80d5]/"
+//val coap_url_2 = "coap://[aaaa::212:4b00:5af:825a]/"
+//val coap_url_1 = "coap://[aaaa::212:4b00:5af:7f61]/"
+//val coap_url_0 = "coap://[aaaa::212:4b00:5af:81a0]/"
+val http_url = "http://raspberrypi:8080/proxy/coap://["
+val coap_url_mote = "aaaa::212:4b00:5a9:8ff0"
+val actuators_url = "]/actuators/leds?color="
 val video_script_path = "/home/arex/smart-campus/smart-ecust/conf/automation/"
+val lights_script_path = "/home/arex/smart-campus/smart-ecust/conf/automation/"
 
 //val Number light_rows = 4
 //val Number light_cols = 3
@@ -37,73 +40,73 @@ then
 	}
 end
 
-rule "Switch Seat"
-when
-    Item Seats received update
-then
-	//Seats.members.filter[s| s.state.toString == "ON"].forEach[s | 
-	//			var x = transform("REGEX", "FF_302_seat_([0-9])(.*)", s.name)
-	//			var y = transform("REGEX", "FF_302_seat_" + x + "_([0-9])", s.name)
-	//			for (var i = 0; i < light_rows; i++){
-	//				for (var j = 0; j < light_cols; j++){
-	//					if (Math::abs(Integer::parseInt(x) - Integer::parseInt(x_Light.get(i))) <= 1 && Math::abs(Integer::parseInt(y) - Integer::parseInt(y_Light.get(j))) <= 2){
-	//						var x_y_Light = "Light_FF_" + x_Light.get(i) + "_" + y_Light.get(j)
-	//						//logInfo("x_y_Light", x_y_Light)
-	//						Lights.members.filter[l| l.name == x_y_Light].forEach[l |
-	//							//logInfo("test", l.name)
-	//							l.sendCommand(ON)
-	//						]
-	//					}
-	//				}
-	//			}
-	//		]
-	//Seats.members.filter[s| s.state.toString == "OFF"].forEach[s | 
-	//			var x = transform("REGEX", "FF_302_seat_([0-9])(.*)", s.name)
-	//			var y = transform("REGEX", "FF_302_seat_" + x + "_([0-9])", s.name)
-
-	//			var	temp_x = newArrayList("0", "0", "0", "0")
-	//			var	temp_y = newArrayList("0", "0", "0", "0")
-	//			
-	//			var count = 0
-
-	//			//count++
-	//			//temp_x.set(count, x_Light.get(1))
-	//			//logInfo("arex", temp_x.get(1))
-
-	//			for (var i = 0; i < light_rows; i++){
-	//				for (var j = 0; j < light_cols; j++){
-	//					if (Math::abs(Integer::parseInt(x) - Integer::parseInt(x_Light.get(i))) <= 1 && Math::abs(Integer::parseInt(y) - Integer::parseInt(y_Light.get(j))) <= 2){
-	//						temp_x.set(count, x_Light.get(i))
-	//						temp_y.set(count, y_Light.get(j))
-	//						count++
-	//						//logInfo("arex", temp_x.get(1))
-	//					}
-	//				}
-	//			}
-
-	//			var flag = 0
-	//			//logInfo("test", "test")
-	//			for (var k = 0; k < count; k++) {
-	//				for (var m = Integer::parseInt(temp_x.get(k)) - 1; m < Integer::parseInt(temp_x.get(k)) + 2 && flag == 0; m++) {
-	//					for (var n = Integer::parseInt(temp_y.get(k)) - 2; n < Integer::parseInt(temp_y.get(k)) + 3 && flag == 0; n++) {
-	//						var m_n_Seat = "FF_302_seat_" + m + "_" + n
-	//						logInfo("m_n_Seat", m_n_Seat)
-	//						Seats.members.filter[s| s.state.toString == "ON" && s.name == m_n_Seat].forEach[s |
-	//							flag = 1
-	//						]
-	//					}
-	//				}
-	//				if (flag == 0) {
-	//					var x_y_Light = "Light_FF_" + temp_x.get(k) + "_" + temp_y.get(k)
-	//					logInfo("x_y_Light", x_y_Light)
-	//					Lights.members.filter[l| l.name == x_y_Light].forEach[l |
-	//						logInfo("ecust", l.name)
-	//						l.sendCommand(OFF)
-	//					]
-	//				}
-	//			}
-	//		]
-end
+//rule "Switch Seat"
+//when
+//    Item Seats received update
+//then
+//	Seats.members.filter[s| s.state.toString == "ON"].forEach[s | 
+//				var x = transform("REGEX", "FF_302_seat_([0-9])(.*)", s.name)
+//				var y = transform("REGEX", "FF_302_seat_" + x + "_([0-9])", s.name)
+//				for (var i = 0; i < light_rows; i++){
+//					for (var j = 0; j < light_cols; j++){
+//						if (Math::abs(Integer::parseInt(x) - Integer::parseInt(x_Light.get(i))) <= 1 && Math::abs(Integer::parseInt(y) - Integer::parseInt(y_Light.get(j))) <= 2){
+//							var x_y_Light = "Light_FF_" + x_Light.get(i) + "_" + y_Light.get(j)
+//							//logInfo("x_y_Light", x_y_Light)
+//							Lights.members.filter[l| l.name == x_y_Light].forEach[l |
+//								//logInfo("test", l.name)
+//								l.sendCommand(ON)
+//							]
+//						}
+//					}
+//				}
+//			]
+//	Seats.members.filter[s| s.state.toString == "OFF"].forEach[s | 
+//				var x = transform("REGEX", "FF_302_seat_([0-9])(.*)", s.name)
+//				var y = transform("REGEX", "FF_302_seat_" + x + "_([0-9])", s.name)
+//
+//				var	temp_x = newArrayList("0", "0", "0", "0")
+//				var	temp_y = newArrayList("0", "0", "0", "0")
+//				
+//				var count = 0
+//
+//				//count++
+//				//temp_x.set(count, x_Light.get(1))
+//				//logInfo("arex", temp_x.get(1))
+//
+//				for (var i = 0; i < light_rows; i++){
+//					for (var j = 0; j < light_cols; j++){
+//						if (Math::abs(Integer::parseInt(x) - Integer::parseInt(x_Light.get(i))) <= 1 && Math::abs(Integer::parseInt(y) - Integer::parseInt(y_Light.get(j))) <= 2){
+//							temp_x.set(count, x_Light.get(i))
+//							temp_y.set(count, y_Light.get(j))
+//							count++
+//							//logInfo("arex", temp_x.get(1))
+//						}
+//					}
+//				}
+//
+//				var flag = 0
+//				//logInfo("test", "test")
+//				for (var k = 0; k < count; k++) {
+//					for (var m = Integer::parseInt(temp_x.get(k)) - 1; m < Integer::parseInt(temp_x.get(k)) + 2 && flag == 0; m++) {
+//						for (var n = Integer::parseInt(temp_y.get(k)) - 2; n < Integer::parseInt(temp_y.get(k)) + 3 && flag == 0; n++) {
+//							var m_n_Seat = "FF_302_seat_" + m + "_" + n
+//							logInfo("m_n_Seat", m_n_Seat)
+//							Seats.members.filter[s| s.state.toString == "ON" && s.name == m_n_Seat].forEach[s |
+//								flag = 1
+//							]
+//						}
+//					}
+//					if (flag == 0) {
+//						var x_y_Light = "Light_FF_" + temp_x.get(k) + "_" + temp_y.get(k)
+//						logInfo("x_y_Light", x_y_Light)
+//						Lights.members.filter[l| l.name == x_y_Light].forEach[l |
+//							logInfo("ecust", l.name)
+//							l.sendCommand(OFF)
+//						]
+//					}
+//				}
+//			]
+//end
 
 rule "Switch Vides"
 when
@@ -118,174 +121,173 @@ end
 
 rule "Switch Light 7_2"
 when
-    Item Light_FF_7_2 received command
+Item Light_FF_7_2 received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_4 + dimmed_url + "r" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_4 + dimmed_url + "r" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote5 + " bled1")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote5 + " bled1")
+}
 end
 
 rule "Switch Light 7_5"
 when
-    Item Light_FF_7_5 received command
+Item Light_FF_7_5 received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_4 + dimmed_url + "g" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_4 + dimmed_url + "g" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote5 + " bled2")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote5 + " bled2")
+}
 end
 
 rule "Switch Light 7_8"
 when
-    Item Light_FF_7_8 received command
+Item Light_FF_7_8 received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_4 + dimmed_url + "b" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_4 + dimmed_url + "b" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote5 + " bled3")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote5 + " bled3")
+}
 end
 
 rule "Switch Light 5_2"
 when
-    Item Light_FF_5_2 received command
+Item Light_FF_5_2 received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_3 + dimmed_url + "r" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_3 + dimmed_url + "r" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote4 + " bled1")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote4 + " bled1")
+}
 end
 
 rule "Switch Light 5_5"
 when
-    Item Light_FF_5_5 received command
+Item Light_FF_5_5 received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_3 + dimmed_url + "g" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_3 + dimmed_url + "g" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote4 + " bled2")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote4 + " bled2")
+}
 end
 
 rule "Switch Light 5_8"
 when
-    Item Light_FF_5_8 received command
+Item Light_FF_5_8 received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_3 + dimmed_url + "b" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_3 + dimmed_url + "b" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote4 + " bled3")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote4 + " bled3")
+}
 end
 
 rule "Switch Light 3_2"
 when
-    Item Light_FF_3_2 received command
+Item Light_FF_3_2 received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_2 + dimmed_url + "r" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_2 + dimmed_url + "r" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote3 + " bled1")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote3 + " bled1")
+}
 end
 
 rule "Switch Light 3_5"
 when
-    Item Light_FF_3_5 received command
+Item Light_FF_3_5 received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_2 + dimmed_url + "g" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_2 + dimmed_url + "g" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote3 + " bled2")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote3 + " bled2")
+}
 end
 
 rule "Switch Light 3_8"
 when
-    Item Light_FF_3_8 received command
+Item Light_FF_3_8 received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_2 + dimmed_url + "b" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_2 + dimmed_url + "b" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote3 + " bled3")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote3 + " bled3")
+}
 end
 
 rule "Switch Light 1_2"
 when
-    Item Light_FF_1_2 received command
+Item Light_FF_1_2 received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_1 + dimmed_url + "r" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_1 + dimmed_url + "r" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote2 + " bled1")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote2 + " bled1")
+}
 end
 
 rule "Switch Light 1_5"
 when
-    Item Light_FF_1_5 received command
+Item Light_FF_1_5 received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_1 + dimmed_url + "g" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_1 + dimmed_url + "g" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote2 + " bled2")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote2 + " bled2")
+}
 end
 
 rule "Switch Light 1_8"
 when
-    Item Light_FF_1_8 received command
+Item Light_FF_1_8 received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_1 + dimmed_url + "b" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_1 + dimmed_url + "b" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote2 + " bled3")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote2 + " bled3")
+}
 end
 
 rule "Switch Light l"
 when
-    Item Light_FF_l received command
+Item Light_FF_l received command
 then
-    if(receivedCommand==ON) {
-	//sendNotification("zjfbob@sina.com", "Hello world!")
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_0 + dimmed_url + "g" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_0 + dimmed_url + "g" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote + " bled1")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote + " bled1")
+}
 end
 
 rule "Switch Light r"
 when
-    Item Light_FF_r received command
+Item Light_FF_r received command
 then
-    if(receivedCommand==ON) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_0 + dimmed_url + "b" + "@@-d@@" + "dimmed=99")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_0 + dimmed_url + "b" + "@@-d@@" + "dimmed=100")
-    }
+if(receivedCommand==ON) {
+	executeCommandLine(lights_script_path + "open-lights.sh " + coap_url_mote + " bled2")
+} else if(receivedCommand==OFF) {
+	executeCommandLine(lights_script_path + "close-lights.sh " + coap_url_mote + " bled2")
+}
 end
 
-/**
- * This is a demo rule which simulates a real dimmer by reacting to increase/decrease commands
- * and posting an updated state on the bus
- */
-rule "Dimmed Light"
-	when
-		Item DimmedLight received command
-	then
-	var Number percent = 0
-	if(DimmedLight.state instanceof DecimalType) percent = DimmedLight.state as DecimalType
-	if(percent<=0)   percent = 1 
-	if(percent>=100) percent = 99
-	executeCommandLine("curl" + "@@-XPOST@@" + http_url + coap_url_0 + dimmed_url + "g" + "@@-d@@" + "dimmed=" + percent)
-end
-
+///**
+// * This is a demo rule which simulates a real dimmer by reacting to increase/decrease commands
+// * and posting an updated state on the bus
+// */
+//rule "Dimmed Light"
+//	when
+//		Item DimmedLight received command
+//	then
+//	var Number percent = 0
+//	if(DimmedLight.state instanceof DecimalType) percent = DimmedLight.state as DecimalType
+//	if(percent<=0)   percent = 1 
+//	if(percent>=100) percent = 99
+//		executeCommandLine(lights_script_path + "dimmed-lights.sh " + coap_url_mote1 + " bled1")
+//end
+//
 ///**
 // * This is a demo rule which simulates a real dimmer by reacting to increase/decrease commands
 // * and posting an updated state on the bus

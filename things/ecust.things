@@ -2,8 +2,8 @@
 //astro:sun:home   [ geolocation="52.5200066,13.4049540", interval=60 ]
 //astro:moon:home  [ geolocation="52.5200066,13.4049540", interval=60 ]
 //ntp:ntp:demo [ hostname="nl.pool.ntp.org", refreshInterval=60, refreshNtp=30 ]
-exec:command:light [ command="curl -X GET http://raspberrypi:8080/proxy/coap://[aaaa::212:4b00:5af:81d8]/sensors/light", transform="REGEX(.*?([0-9]+).*)", interval=60 ]
-//exec:command:human [ command="curl -X GET http://raspberrypi:8080/proxy/coap://[aaaa::212:4b00:5af:81d8]/sensors/human", transform="REGEX(.*?([0-9]+).*)", interval=5 ]
-//exec:command:hello [ command="curl -X GET http://raspberrypi:8080/proxy/coap://[aaaa::212:4b00:5af:81d8]/test/occupy", transform="REGEX(.*?([A-Za-z]+).*)", interval=5 ]
+exec:command:light [ command="curl -X GET http://raspberrypi:8080/proxy/coap://[aaaa::212:4b00:5a9:8ff0]/sensors/light", transform="REGEX(.*?([0-9]+).*)", interval=60 ]
+exec:command:human [ command="curl -X GET http://raspberrypi:8080/proxy/coap://[aaaa::212:4b00:5a9:8ff0]/sensors/human", transform="REGEX(.*?([0-9]+).*)", interval=5 ]
+//exec:command:hello [ command="curl -X GET http://raspberrypi:8080/proxy/coap://[aaaa::212:4b00:5a9:8ff0]/test/occupy", transform="REGEX(.*?([A-Za-z]+).*)", interval=5 ]
 
 // vim: syntax=Xtend
