@@ -1,4 +1,4 @@
 #!/bin/bash
 
 pkill mpv
-mpv --fs "$HOME/Videos/$1"
+mpv --fs "$HOME/Movies/$1"

@@ -7,9 +7,9 @@ Strategies {
 Items {
 	//DemoSwitch,NoOfLights,Window_GF_Toilet,Heating* : strategy = everyChange, everyMinute, restoreOnStartup
 	//
-	//// let's only store temperature values in rrd
-	//Temperature*,Weather_Chart* : strategy = everyMinute, restoreOnStartup
-	Photometry*,Light_FF*,FF_302_seat* : strategy = everyChange, everyMinute
+	// let's only store temperature values in rrd
+	Temperature*,Weather_Chart* : strategy = everyChange, everyMinute, restoreOnStartup
+	Photometry*,Light_FF*,FF_302_seat*,Human_FF* : strategy = everyChange, everyMinute, restoreOnStartup
 }
 
 // vim: syntax=Xtend

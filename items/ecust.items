@@ -24,18 +24,18 @@ Group FF_302       	"302"      		<classroom>  (gFF)
 //Group FF_307        "307"       	<classroom>  (gFF)
 //Group FF_309   		"309"      		<classroom>  (gFF)
 
-//Group FF_302_Light    "开关"      	<light>  	(FF_302)
-//
-//Group FF_302_Dimming  "调光"     <slider>  	(FF_302)
-//
-//Group FF_302_seat  	"座位"     		<seat>  (FF_302)
+Group FF_302_Light    "开关"      	<light>  	(FF_302)
+
+Group FF_302_Dimming  "调光"     <slider>  	(FF_302)
+
+Group FF_302_seat  	"座位"     		<seat>  (FF_302)
 
 String VoiceCommand
 
 String Photometry_FF_0			"教室光照度 [%s Lux]"  		<sun> 		(FF_302) { channel="exec:command:light:output" }
 String Human_FF_0				"座位 [MAP(zh.map):%s]"  					<human> 	(FF_302) { channel="exec:command:human:output" }
 //String Hello_FF_0				"Hello [%s]"  					<human> 	(FF_302) { channel="exec:command:hello:output" }
-Switch Videos					"视频"  		<office> 		(FF_302)
+Switch Videos					"视频"  		<video> 		(FF_302)
 
 //Contact Window_FF_1 			"窗 [MAP(zh.map):%s]"    	(FF_302, Windows)
 //Contact Door_FF_1   			"门 [MAP(zh.map):%s]"     	(FF_302, Windows)
@@ -218,13 +218,13 @@ Group:Switch:OR(ON, OFF)        Seats      	"All Seats [(%d)]"
 //Contact Window_FF_Office_Door   "Balcony Door [MAP(en.map):%s]"     (FF_Office, Windows)
 //
 //Contact Garage_Door             "Garage Door [MAP(en.map):%s]"      (Garden, Windows)
-//
-//Group Weather_Chart
-//Number Weather_Temperature      "Outside Temperature [%.1f °C]" <temperature> (Weather, Weather_Chart) { channel="yahooweather:weather:berlin:temperature" }
-//Number Weather_Temp_Max         "Todays Maximum [%.1f °C]"      <temperature> (Weather, Weather_Chart)
-//Number Weather_Temp_Min         "Todays Minimum [%.1f °C]"      <temperature> (Weather, Weather_Chart)
-//Number Weather_Chart_Period     "Chart Period"
-//DateTime Weather_LastUpdate     "Last Update [%1$ta %1$tR]"     <clock>
+
+Group Weather_Chart
+Number Weather_Temperature      "室内光照强度 [%.1f Lux]" <sun> (Weather, Weather_Chart)
+Number Weather_Temp_Max         "今日最强光照度 [%.1f Lux]"      <sun> (Weather, Weather_Chart)
+Number Weather_Temp_Min         "今日最弱光强度 [%.1f Lux]"      <sun> (Weather, Weather_Chart)
+Number Weather_Chart_Period     "Chart Period"
+DateTime Weather_LastUpdate     "最近更新 [%1$ta %1$tR]"     <clock>
 //Number Sun_Elevation            "Sun Elevation"                 <sun>       { channel = "astro:sun:home:position#elevation" }
 //Number Sun_Azimuth              "Sun Azimuth"                   <sun>       { channel = "astro:sun:home:position#azimuth" }
 //DateTime Sunrise_Time           "Sunrise [%1$tH:%1$tM]"         <sunrise>   { channel = "astro:sun:home:rise#start" }
