@@ -30,6 +30,8 @@ Group FF_302_Dimming  "调光"     <slider>  	(FF_302)
 
 Group FF_302_seat  	"座位"     		<seat>  (FF_302)
 
+Group gOpenLightsSchedTime
+
 String VoiceCommand
 
 String Photometry_FF_0			"教室光照度 [%s Lux]"  		<sun> 		(FF_302) { channel="exec:command:light:output" }
@@ -250,5 +252,21 @@ DateTime Weather_LastUpdate     "最近更新 [%1$ta %1$tR]"     <clock>
 //Group Thermostat                "Thermostat"            <temperature>                    ["Thermostat"]
 //Number Temperature_Setpoint     "Temperature [%.1f °C]" <temperature>    (Thermostat)    ["TargetTemperature"]
 //String Thermostat_Mode          "Thermostat Mode [%s]"  <temperature>    (Thermostat)    ["homekit:HeatingCoolingMode"]
+
+Switch EnableAutoLights
+Switch EnableLightsScheduler
+
+Switch  OpenLightsSchedMonday "星期一"     <switch>  (gOpenLightsSchedTime) 
+Switch  OpenLightsSchedTuesday "星期二"   <switch>  (gOpenLightsSchedTime) 
+Switch  OpenLightsSchedWednesday "星期三"   <switch>  (gOpenLightsSchedTime) 
+Switch  OpenLightsSchedThursday "星期四" <switch>  (gOpenLightsSchedTime) 
+Switch  OpenLightsSchedFriday "星期五"    <switch>  (gOpenLightsSchedTime) 
+Switch  OpenLightsSchedSaturday "星期六"    <switch>  (gOpenLightsSchedTime) 
+Switch  OpenLightsSchedSunday "星期日"    <switch>  (gOpenLightsSchedTime) 
+
+Number OpenLightsSchedTimeHour "Hour [%d]" <clock-on> (gOpenLightsSchedTime)
+Number OpenLightsSchedTimeMinute "Minute [%d]" <clock-on> (gOpenLightsSchedTime)
+Number OpenLightsSchedTimeEndHour "Hour [%d]" <clock> (gOpenLightsSchedTime)
+Number OpenLightsSchedTimeEndMinute "Minute [%d]" <clock> (gOpenLightsSchedTime)
 
 // vim: syntax=Xtend

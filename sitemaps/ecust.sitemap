@@ -74,6 +74,39 @@ sitemap ecust label="徐汇校区第四教学楼"
 		//	}
 		//}
 	}
+    Frame label="教室能源" {
+		
+    	Text label="能源控制" icon="switch" {
+ 	            Frame label="控制策略" {
+	                Switch item=EnableAutoLights label="自动控制"
+	            }   	
+
+    			Text label="开灯计划" icon="clock-on" {
+ 
+ 	    		        Frame label="开启开灯计划" {
+	    		            Switch item=EnableLightsScheduler label="开启计划任务"
+	    		        }
+
+	    		        Frame label="开始时间" {
+	    		        	Selection item=OpenLightsSchedTimeHour label="时" mappings=[0="00:00", 1="01:00", 2="02:00", 3="03:00", 4="04:00", 5="05:00", 6="06:00", 7="07:00", 8="08:00", 9="09:00", 10="10:00", 11="11:00", 12="12:00",13="13:00", 14="14:00", 15="15:00", 16="16:00", 17="17:00", 18="18:00", 19="19:00", 20="20:00", 21="21:00", 22="22:00", 23="23:00"]
+	    		        	Selection item=OpenLightsSchedTimeMinute label="分" mappings=[0="00", 5="05", 10="10", 15="15", 20="20", 25="25", 30="30", 35="35", 40="40", 45="45", 50="50", 55="55"]
+	    		        }
+	    		        Frame label="结束时间" {
+	    		        	Selection item=OpenLightsSchedTimeEndHour label="时" mappings=[0="00:00", 1="01:00", 2="02:00", 3="03:00", 4="04:00", 5="05:00", 6="06:00", 7="07:00", 8="08:00", 9="09:00", 10="10:00", 11="11:00", 12="12:00",13="13:00", 14="14:00", 15="15:00", 16="16:00", 17="17:00", 18="18:00", 19="19:00", 20="20:00", 21="21:00", 22="22:00", 23="23:00"]
+	    		        	Selection item=OpenLightsSchedTimeEndMinute label="分" mappings=[0="00", 5="05", 10="10", 15="15", 20="20", 25="25", 30="30", 35="35", 40="40", 45="45", 50="50", 55="55"]
+	    		        }
+	    		        Frame label="重复计划任务" {
+	    		            Switch item=OpenLightsSchedMonday
+	    		            Switch item=OpenLightsSchedTuesday
+	    		            Switch item=OpenLightsSchedWednesday
+	    		            Switch item=OpenLightsSchedThursday
+	    		            Switch item=OpenLightsSchedFriday
+	    		            Switch item=OpenLightsSchedSaturday
+	    		            Switch item=OpenLightsSchedSunday
+	    		        }
+	    		    }  
+			}
+	}
 }
 
 // vim: syntax=Xtend
