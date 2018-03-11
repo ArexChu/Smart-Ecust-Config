@@ -1,48 +1,48 @@
-Group gFF           "First Floor"   <firstfloor>
+//Group gFF           "First Floor"   <firstfloor>
 //Group gGF           "Ground Floor"  <groundfloor>
 //Group gC            "Cellar"        <cellar>
 //Group Garden        "Garden"        <garden>
-//Group Weather       "Weather"       <sun>
+Group Weather       "Weather"       <sun>
+Group Daylight       "Daylight"       <sun>
+Group Occupancy       "Occupancy"       <human>
 
 //Group Status
 //Group Shutters
-
+//
 //Group GF_Living     "Living Room"   <video>     (gGF)
 //Group GF_Kitchen    "Kitchen"       <kitchen>   (gGF)
 //Group GF_Toilet     "Toilet"        <bath>      (gGF)
 //Group GF_Corridor   "Corridor"      <corridor>  (gGF)
-
+//
 //Group FF_Bath       "Bathroom"      <bath>      (gFF)
 //Group FF_Office     "Office"        <office>    (gFF)
 //Group FF_Child      "Child's Room"  <boy_1>      (gFF)
 //Group FF_Bed        "Bedroom"       <bedroom>   (gFF)
 //Group FF_Corridor   "Corridor"      <corridor>  (gFF)
 
-Group FF_302       	"302"      		<classroom>  (gFF)
-//Group FF_303     	"303"        	<classroom>  (gFF)
+//Group FF_302       	"302"      		<classroom>
+//Group FF_303     	"303"        	<classroom>
 //Group FF_305      	"305"  			<classroom>  (gFF)
 //Group FF_307        "307"       	<classroom>  (gFF)
 //Group FF_309   		"309"      		<classroom>  (gFF)
 
-Group FF_302_Light    "开关"      	<light>  	(FF_302)
+Group FF_302_Light    "开关"      	<light>
 
-Group FF_302_Dimming  "调光"     <slider>  	(FF_302)
+Group FF_302_Dimming  "调光"     <slider>
 
-Group FF_302_seat  	"座位"     		<seat>  (FF_302)
+Group FF_302_seat  	"座位"     		<seat>
 
 Group gOpenLightsSchedTime
 
 String VoiceCommand
 
-String Photometry_FF_0			"教室光照度 [%s Lux]"  		<sun> 		(FF_302) { channel="exec:command:light:output" }
-String Human_FF_0				"座位 [MAP(zh.map):%s]"  					<human> 	(FF_302) { channel="exec:command:human:output" }
+String Photometry_FF_0			"环境光传感器 [%s Lux]"  		<sun> 		 { channel="exec:command:light:output" }
+String PIR_FF_0				"热释电红外传感器 [MAP(zh.map):%s]"  					<human> 	 { channel="exec:command:human:output" }
 //String Hello_FF_0				"Hello [%s]"  					<human> 	(FF_302) { channel="exec:command:hello:output" }
-Switch Videos					"视频"  		<video> 		(FF_302)
+//Switch Videos					"视频"  		<video> 		(FF_302)
 
-//Contact Window_FF_1 			"窗 [MAP(zh.map):%s]"    	(FF_302, Windows)
-//Contact Door_FF_1   			"门 [MAP(zh.map):%s]"     	(FF_302, Windows)
-//Number Temperature_FF_0      	"温度 [%.1f °C]" 	<temperature>   (Temperature, FF_302)
-
+Contact Window_FF_1 			"窗 [MAP(zh.map):%s]"    	(Windows)
+Contact Door_FF_1   			"门 [MAP(zh.map):%s]"     	(Windows)
 
 Switch Light_FF_7_2				"四排一列"					<light> 	(FF_302_Light, Lights)
 Switch Light_FF_7_5				"四排二列"					<light> 	(FF_302_Light, Lights)
@@ -59,7 +59,7 @@ Switch Light_FF_1_8				"一排三列"					<light> 	(FF_302_Light, Lights)
 Switch Light_FF_l				"讲台灯左"					<light> 	(FF_302_Light, Lights)
 Switch Light_FF_r				"讲台灯右"					<light> 	(FF_302_Light, Lights)
 
-Dimmer DimmedLight  			"Dimmer [%s]"      			<slider> 	(FF_302_Dimming)
+Dimmer DimmedLight  			"调光器 [%s]"      			<slider> 	(FF_302_Dimming)
 
 Switch FF_302_seat_0_0 			"一排一列"    			    <human>		(FF_302_seat, Seats)
 Switch FF_302_seat_0_1 			"一排二列"    			    <human>		(FF_302_seat, Seats)
@@ -149,7 +149,7 @@ Group:Switch:OR(ON, OFF)        Seats      	"All Seats [(%d)]"
 
 //Group:Switch:OR(ON, OFF)        Heating     "No. of Active Heatings [(%d)]"     <heating>
 //Group:Number:AVG                Temperature "Avg. Room Temperature [%.1f °C]"   <temperature>   (Status)
-//Group:Contact:OR(OPEN, CLOSED)  Windows     "Open windows [(%d)]"               <contact>
+Group:Contact:OR(OPEN, CLOSED)  Windows     "Open windows [(%d)]"               <contact>
 
 ///* Lights */
 //Dimmer Light_GF_Living_Table        "Table"     (GF_Living, Lights)     ["Lighting"]
@@ -221,12 +221,25 @@ Group:Switch:OR(ON, OFF)        Seats      	"All Seats [(%d)]"
 //
 //Contact Garage_Door             "Garage Door [MAP(en.map):%s]"      (Garden, Windows)
 
+Group Daylight_Chart
+Number Daylight_Illuminance      "室内光照强度 [%.1f Lux]" <sun> (Daylight, Daylight_Chart)
+Number Daylight_Temp_Max         "今日最强光照度 [%.1f Lux]"      <sun> (Daylight, Daylight_Chart)
+Number Daylight_Temp_Min         "今日最弱光强度 [%.1f Lux]"      <sun> (Daylight, Daylight_Chart)
+Number Daylight_Chart_Period     "Chart Period"
+DateTime Daylight_LastUpdate     "最近更新 [%1$ta %1$tR]"     <clock>
+
+Group Human_Chart
+Number Human_Occupancy      "人[MAP(zh.map):%s]" <human> (Occupancy, Human_Chart)
+Number Human_Temp         "人[MAP(zh.map):%s]"      <human> (Occupancy, Human_Chart)
+Number Human_Chart_Period     "Chart Period"
+DateTime Human_LastUpdate     "最近更新 [%1$ta %1$tR]"     <clock>
+
 Group Weather_Chart
-Number Weather_Temperature      "室内光照强度 [%.1f Lux]" <sun> (Weather, Weather_Chart)
-Number Weather_Temp_Max         "今日最强光照度 [%.1f Lux]"      <sun> (Weather, Weather_Chart)
-Number Weather_Temp_Min         "今日最弱光强度 [%.1f Lux]"      <sun> (Weather, Weather_Chart)
+Number Weather_Temperature      "温度 [%.1f °C]" <temperature> (Weather, Weather_Chart) { channel="yahooweather:weather:shanghai:temperature" }
+Number Weather_Temp_Max         "今日最高温度 [%.1f °C]"      <temperature> (Weather, Weather_Chart)
+Number Weather_Temp_Min         "今日最低温度 [%.1f °C]"      <temperature> (Weather, Weather_Chart)
 Number Weather_Chart_Period     "Chart Period"
-DateTime Weather_LastUpdate     "最近更新 [%1$ta %1$tR]"     <clock>
+DateTime Weather_LastUpdate     "最近更新 [%1$tR]"     <clock>
 //Number Sun_Elevation            "Sun Elevation"                 <sun>       { channel = "astro:sun:home:position#elevation" }
 //Number Sun_Azimuth              "Sun Azimuth"                   <sun>       { channel = "astro:sun:home:position#azimuth" }
 //DateTime Sunrise_Time           "Sunrise [%1$tH:%1$tM]"         <sunrise>   { channel = "astro:sun:home:rise#start" }

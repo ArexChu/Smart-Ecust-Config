@@ -19,7 +19,7 @@
 val http_url = "http://raspberrypi:8080/proxy/coap://["
 val coap_url_mote = "aaaa::212:4b00:5a9:8ff0"
 val actuators_url = "]/actuators/leds?color="
-val video_script_path = "/Users/arex/smart-campus/smart-ecust/conf/automation/"
+//val video_script_path = "/Users/arex/smart-campus/smart-ecust/conf/automation/"
 val lights_script_path = "/Users/arex/smart-campus/smart-ecust/conf/automation/"
 
 //val Number light_rows = 4
@@ -32,7 +32,16 @@ rule "String to Number"
 when
     Item Photometry_FF_0 changed
 then
-    Weather_Temperature.postUpdate(Float::parseFloat(String::format("%s",Photometry_FF_0.state).replace(' ','')))
+    Daylight_Illuminance.postUpdate(Float::parseFloat(String::format("%s",Photometry_FF_0.state).replace(' ','')))
+end
+
+rule "Human Occupancy String to Number"
+when
+    Item PIR_FF_0 changed
+then
+	var pir_temp = Integer::parseInt(String::format("%s",PIR_FF_0.state).replace(' ',''))
+    Human_Occupancy.postUpdate(pir_temp)
+    Human_Temp.postUpdate(pir_temp)
 end
 
 rule "VoiceControl" 
@@ -114,17 +123,17 @@ end
 //				}
 //			]
 //end
-
-rule "Switch Vides"
-when
-    Item Videos received command
-then
-    if(receivedCommand==ON) {
-	executeCommandLine(video_script_path + "open-videos.sh video3.mkv")
-    } else if(receivedCommand==OFF) {
-	executeCommandLine(video_script_path + "close-videos.sh")
-    }
-end
+//
+//rule "Switch Vides"
+//when
+//    Item Videos received command
+//then
+//    if(receivedCommand==ON) {
+//	executeCommandLine(video_script_path + "open-videos.sh video3.mkv")
+//    } else if(receivedCommand==OFF) {
+//	executeCommandLine(video_script_path + "close-videos.sh")
+//    }
+//end
 
 rule "Switch Light 7_2"
 when
@@ -361,16 +370,16 @@ end
 //		)
 //		postUpdate(Temperature_Setpoint, 22)
 //end
-//
-//rule "Initialize contact states"
-//	when
-//		System started
-//	then
-//		Windows?.members.forEach(window|
-//			postUpdate(window, if(Math::random > 0.5) OPEN else CLOSED)
-//		)
-//end
-//
+
+rule "Initialize contact states"
+	when
+		System started
+	then
+		Windows?.members.forEach(window|
+			postUpdate(window, if(Math::random > 0.5) OPEN else CLOSED)
+		)
+end
+
 //rule "Initialize Location"
 //	when
 //		System started
@@ -388,6 +397,36 @@ end
 //		)
 //end
 //
+rule "Set daily max and min illuminance"
+when
+	Item Daylight_Illuminance changed or
+	Time cron "0 0 0 * * ?" or
+	System started
+then
+	val max = Daylight_Illuminance.maximumSince(now.withTimeAtStartOfDay)
+	val min = Daylight_Illuminance.minimumSince(now.withTimeAtStartOfDay)
+	if( max != null && min != null) {
+		postUpdate(Daylight_Temp_Max, max.state)
+		postUpdate(Daylight_Temp_Min, min.state)
+	}
+end
+
+// Creates an item that stores the last update time of this item
+rule "Records last illuminance update time"
+when
+  Item Daylight_Illuminance received update
+then
+  postUpdate(Daylight_LastUpdate, new DateTimeType())
+end
+
+// Creates an item that stores the last update time of this item
+rule "Records last human occupancy update time"
+when
+  Item Human_Occupancy received update
+then
+  postUpdate(Human_LastUpdate, new DateTimeType())
+end
+
 rule "Set daily max and min temperature"
 when
 	Item Weather_Temperature changed or
