@@ -223,8 +223,8 @@ Group:Contact:OR(OPEN, CLOSED)  Windows     "Open windows [(%d)]"               
 
 Group Daylight_Chart
 Number Daylight_Illuminance      "室内光照强度 [%.1f Lux]" <sun> (Daylight, Daylight_Chart)
-Number Daylight_Temp_Max         "今日最强光照度 [%.1f Lux]"      <sun> (Daylight, Daylight_Chart)
-Number Daylight_Temp_Min         "今日最弱光强度 [%.1f Lux]"      <sun> (Daylight, Daylight_Chart)
+//Number Daylight_Temp_Max         "今日最强光照度 [%.1f Lux]"      <sun> (Daylight, Daylight_Chart)
+//Number Daylight_Temp_Min         "今日最弱光强度 [%.1f Lux]"      <sun> (Daylight, Daylight_Chart)
 Number Daylight_Chart_Period     "Chart Period"
 DateTime Daylight_LastUpdate     "最近更新 [%1$ta %1$tR]"     <clock>
 

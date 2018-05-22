@@ -10,8 +10,8 @@ sitemap classroom label="徐汇四教302模型"
 		Text label="环境详细信息" icon="classroom" {
 			Text item=Daylight_Illuminance valuecolor=[Daylight_LastUpdate=="NULL"="lightgray",Daylight_LastUpdate>90="lightgray",>25="orange",>15="green",>5="orange",<=5="blue"] {
 				Frame {
-					Text item=Daylight_Temp_Max valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"]
-					Text item=Daylight_Temp_Min valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"]
+					//Text item=Daylight_Temp_Max valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"]
+					//Text item=Daylight_Temp_Min valuecolor=[>25="orange",>15="green",>5="orange",<=5="blue"]
 					Text item=Daylight_LastUpdate visibility=[Daylight_LastUpdate>30] valuecolor=[Daylight_LastUpdate>120="orange", Daylight_LastUpdate>300="red"]
 				}
 				Frame {

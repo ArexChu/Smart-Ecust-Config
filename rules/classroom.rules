@@ -397,20 +397,20 @@ end
 //		)
 //end
 //
-rule "Set daily max and min illuminance"
-when
-	Item Daylight_Illuminance changed or
-	Time cron "0 0 0 * * ?" or
-	System started
-then
-	val max = Daylight_Illuminance.maximumSince(now.withTimeAtStartOfDay)
-	val min = Daylight_Illuminance.minimumSince(now.withTimeAtStartOfDay)
-	if( max != null && min != null) {
-		postUpdate(Daylight_Temp_Max, max.state)
-		postUpdate(Daylight_Temp_Min, min.state)
-	}
-end
-
+//rule "Set daily max and min illuminance"
+//when
+//	Item Daylight_Illuminance changed or
+//	Time cron "0 0 0 * * ?" or
+//	System started
+//then
+//	val max = Daylight_Illuminance.maximumSince(now.withTimeAtStartOfDay)
+//	val min = Daylight_Illuminance.minimumSince(now.withTimeAtStartOfDay)
+//	if( max != null && min != null) {
+//		postUpdate(Daylight_Temp_Max, max.state)
+//		postUpdate(Daylight_Temp_Min, min.state)
+//	}
+//end
+//
 // Creates an item that stores the last update time of this item
 rule "Records last illuminance update time"
 when
